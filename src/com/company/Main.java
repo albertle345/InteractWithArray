@@ -48,6 +48,7 @@ public class Main {
     private static void printArray(int matrix[][]){
         for(int i = 0; i < MAX_ROW;i++){
             for(int j = 0;j < MAX_COL;j++){
+                System.out.println("Nhap phan tu thu " + (j + 1));
                 System.out.print(matrix[i][j]);
                 System.out.print(' ');
             }
