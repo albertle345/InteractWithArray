@@ -1,19 +1,29 @@
 package com.company;
 
+import javax.swing.plaf.IconUIResource;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.PrimitiveIterator;
+import java.util.Scanner;
 
 public class Main {
+    public static final int MAX_ROW = 2, MAX_COL =  3;
 
     public static void main(String[] args) {
         // write your code here
+        Scanner read = new Scanner(System.in);
         int a[] = {33, 11, 22, 21, 12, 19};
+        int matrix[][] = {{1,3,4},{3,4,5}};
+        int matrix2[][] = new int[3][3];
         int aCopy[] = copyArray(a, a.length);
         int pos = 3, val = 21;
         System.out.println("The First Array: " + Arrays.toString(a));
         System.out.println("The Copy Array: " + Arrays.toString(aCopy));
-
+        System.out.println("in ma tran");
+        printArray(matrix);
+        System.out.println("nhap mang moi");
+        importArray(matrix2, read);
+        printArray(matrix2);
         int newArray[] = insertAnElement(a, 3, 17);
         System.out.println("The  Array after inserted " + Arrays.toString(newArray));
         int eraseElement[] = removeAnElement(a ,val);
@@ -25,6 +35,32 @@ public class Main {
         int combineArray[] = combineArray(firstPart,secondPart);
         System.out.println(("Array after combine "+Arrays.toString(combineArray)));
         divideArray(a);
+        int findElemet = findAnElement(a, val);
+        System.out.println("gia tri can tim "+findElemet);
+        int max = findMax(a);
+        System.out.println("gia tri lon nhat: "+ max);
+        int max2 = findMax2(a);
+        System.out.println("gia tri lon nhat2: "+max2);
+
+        read.close();
+    }
+
+    private static void printArray(int matrix[][]){
+        for(int i = 0; i < MAX_ROW;i++){
+            for(int j = 0;j < MAX_COL;j++){
+                System.out.print(matrix[i][j]);
+                System.out.print(' ');
+            }
+            System.out.println();
+        }
+    }
+    private static void importArray(int matrix[][], Scanner reader){
+        for(int i = 0;i < MAX_ROW;i++){
+            for(int j = 0;j < MAX_COL;j++){
+                //matrix[i] = reader.nextInt();
+                matrix[i][j] = reader.nextInt();
+            }
+        }
     }
 
     private static int[] copyArray(int curArray[], int size) {
@@ -107,6 +143,15 @@ public class Main {
         return newArray;
     }
     // findAnElm(int curArray[], int val) => res = a[x] //Find
+    private static int findAnElement(int curArray[],int val){
+        int res = 0;
+        for(int i = 0;i < curArray.length;i++){
+            if(curArray[i] == val){
+                res = curArray[i];
+            }
+        }
+        return res;
+    }
 
     //divideArray(int curArray[]] )
     private static void divideArray(int curArray[]){
@@ -147,6 +192,37 @@ public class Main {
             }
         }
         return dem;
+    }
+
+    private static int findMax(int curArray[]){
+        int max = curArray[0];
+        for(int i = 1; i < curArray.length; i++){
+            if(max < curArray[i]){
+                max = curArray[i];
+            }
+        }
+        return max;
+    }
+    private static int[] sortArray(int curArray[]) {
+        int newSize = curArray.length;
+        int newArray[] = copyArray(curArray, newSize);
+        for (int i = 0; i < newArray.length - 1; i++) {
+            for (int j = i + 1; j < newArray.length; j++) {
+                if (newArray[i] < newArray[j]) {
+                    int temp = newArray[i];
+                    newArray[i] = newArray[j];
+                    newArray[j] = temp;
+                }
+            }
+        }
+            return newArray;
+
+    }
+    private static int findMax2(int curArray[]){
+            int max = 0;
+            int newArray[] = sortArray(curArray);
+            max = newArray[0];
+            return max;
     }
 
 }
